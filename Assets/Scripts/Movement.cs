@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public bool isGrounded;
+    public Transform groundedEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +21,15 @@ public class Movement : MonoBehaviour
     {
         JumpSystem();
         MovementSystem();
-        
     }
 
     void JumpSystem()
     {
+        isGrounded = Physics2D.Linecast(this.transform.position, groundedEnd.position, 1 << LayerMask.NameToLayer("Ground"));
+
         if (Input.GetButtonDown("Jump") && isGrounded == true)
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
         }
     }
 
@@ -35,5 +37,15 @@ public class Movement : MonoBehaviour
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.eulerAngles = new Vector2(0, 0);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.eulerAngles = new Vector2(0, 180);
+        }
+
+        
     }
 }

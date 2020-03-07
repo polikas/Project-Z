@@ -14,9 +14,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Zombie
+  - Ground
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2829051511
+    locked: 0
+  - name: Enemy
+    uniqueID: 1337661455
     locked: 0
