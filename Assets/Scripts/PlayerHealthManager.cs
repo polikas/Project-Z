@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerHealthManager : MonoBehaviour
 
     public int playerMaxHealth;
     public int playerCurrentHealth;
+    public Image[] hearts;
+    public Sprite fullHeart;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +19,49 @@ public class PlayerHealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerCurrentHealth <= 0)
-        {
-            // kill player
-        }
+        ManagePlayerHealth();
     }
 
     public void HurtPlayer(int damageAmount)
     {
         playerCurrentHealth -= damageAmount;
+        StartCoroutine(playerDamageFeedback());
     }
 
     public void SetMaxHealth()
     {
         playerCurrentHealth = playerMaxHealth;
+    }
+
+    void ManagePlayerHealth()
+    {
+        if (playerCurrentHealth <= 0)
+        {
+            // kill player
+        }
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < playerMaxHealth)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            if (i < playerCurrentHealth)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
+    }
+
+    IEnumerator playerDamageFeedback()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+
     }
 }
