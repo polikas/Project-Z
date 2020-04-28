@@ -24,10 +24,19 @@ public class ZombieHealthManager : MonoBehaviour
     public void HurtZombie(int damageAmount)
     {
         zombieCurrentHealth -= damageAmount;
+        StartCoroutine(zombieDamageFeedback());
     }
 
     public void SetMaxHealth()
     {
         zombieCurrentHealth = zombieMaxHealth;
+    }
+
+    IEnumerator zombieDamageFeedback()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+
     }
 }

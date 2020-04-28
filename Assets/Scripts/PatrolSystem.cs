@@ -10,12 +10,14 @@ public class PatrolSystem : MonoBehaviour
     [SerializeField] private bool spotted = false;
     [SerializeField] private bool facingLeft = false;
     private Transform target;
+    private Movement instance;
     
 
     private void Start()
     {
         InvokeRepeating("Patrol", 0f, Random.Range(2f, 6f));
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        instance = GameObject.Find("Player").GetComponent<Movement>();
     }
    
     void Update()
@@ -56,7 +58,7 @@ public class PatrolSystem : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, minPatrolPos.position, step);
         }
 
-        if(spotted == true)
+        if(spotted == true && instance.isGrounded)
         {
             ChasePlayer();
         }

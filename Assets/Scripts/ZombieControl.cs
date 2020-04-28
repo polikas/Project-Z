@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieControl : MonoBehaviour
 {
-    [SerializeField] private bool inRange = false;
+    [SerializeField] private bool inRange = false; 
     [SerializeField] private int zombieDamage;
     public Transform attackRangeStartPos, attackRangeEndPos;
     private float curTime = 0;
