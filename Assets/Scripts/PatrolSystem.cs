@@ -49,7 +49,8 @@ public class PatrolSystem : MonoBehaviour
     void PatrolMovement()
     {
         float step = moveSpeed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, minPatrolPos.position) < 0.001f)
+        //Vector3.Distance(transform.position, minPatrolPos.position) < 0.001f
+        if (Vector3.Distance(transform.position, minPatrolPos.position) < 0.3f)
         {
             transform.position = Vector3.MoveTowards(transform.position, maxPatrolPos.position, step);
         }
