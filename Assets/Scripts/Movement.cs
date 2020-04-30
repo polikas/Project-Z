@@ -9,11 +9,15 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     public bool isGrounded;
     public Transform groundedEnd;
+    public Animator animator;
+    private float horizontalMove = 0f;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         isGrounded = false;
+        
     }
 
     // Update is called once per frame
@@ -26,10 +30,20 @@ public class Movement : MonoBehaviour
     void JumpSystem()
     {
         isGrounded = Physics2D.Linecast(this.transform.position, groundedEnd.position, 1 << LayerMask.NameToLayer("Ground"));
+        Debug.DrawLine(this.transform.position, groundedEnd.position, Color.green);
 
         if (Input.GetButtonDown("Jump") && isGrounded == true)
         {
             rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            animator.SetBool("Jumping", false);
+        }
+        if (isGrounded)
+        {
+            animator.SetBool("Jumping", false);
+        }
+        if(!isGrounded)
+        {
+            animator.SetBool("Jumping", true);
         }
     }
 
@@ -39,13 +53,26 @@ public class Movement : MonoBehaviour
         transform.position += movement * Time.deltaTime * moveSpeed;
         if (Input.GetKey(KeyCode.D))
         {
+            animator.SetBool("Running", true);
             transform.eulerAngles = new Vector2(0, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
+            animator.SetBool("Running", true);
             transform.eulerAngles = new Vector2(0, 180);
         }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            animator.SetBool("Running", false);
+           
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            animator.SetBool("Running", false);
+            
+        }
 
-        
     }
+
+   
 }

@@ -17,7 +17,7 @@ public class ZombieHealthManager : MonoBehaviour
     {
         if (zombieCurrentHealth <= 0)
         {
-            // kill player
+            Destroy(gameObject);
         }
     }
 
