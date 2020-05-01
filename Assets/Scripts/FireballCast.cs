@@ -6,14 +6,8 @@ public class FireballCast : MonoBehaviour
 {
     public Transform castPoint;
     public GameObject fireballPrefab;
-    
 
     
-
-    private void Start()
-    {
-        
-    }
 
     public void CastFireball()
     {
