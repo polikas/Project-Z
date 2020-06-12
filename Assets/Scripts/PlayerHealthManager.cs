@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
@@ -37,7 +37,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if (playerCurrentHealth <= 0)
         {
-            // kill player
+            RespawnPlayer();
         }
 
         for (int i = 0; i < hearts.Length; i++)
@@ -63,5 +63,10 @@ public class PlayerHealthManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
 
+    }
+
+    public void RespawnPlayer()
+    {
+        SceneManager.LoadScene("GamePlay");
     }
 }

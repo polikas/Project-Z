@@ -6,11 +6,12 @@ public class BossArcherHealth : MonoBehaviour
 {
     public int bossArcherHealth;
     public int bossArcherCurrentHealth;
-    public bool deadArcher = false;
+    public bool deadArcher;
     // Start is called before the first frame update
     void Start()
     {
         SetMaxHealth();
+        deadArcher = false;
     }
 
     // Update is called once per frame
@@ -20,7 +21,6 @@ public class BossArcherHealth : MonoBehaviour
         {
             deadArcher = true;
             Destroy(gameObject);
-            
         }
     }
 

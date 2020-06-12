@@ -10,16 +10,12 @@ public class BossArcherControl : MonoBehaviour
     private float damageBetweenSeconds = 2f;
     public Transform rayStartPos, rayEndPos;
     private Transform target;
-    
-   
 
     private void Start()
     {
         InvokeRepeating("Patrol", 0f, Random.Range(2f, 6f)); 
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();  
     }
-
 
     void Patrol()
     {

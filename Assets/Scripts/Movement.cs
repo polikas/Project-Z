@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public bool isGrounded;
     public Transform groundedEnd;
     public Animator animator;
     private float horizontalMove = 0f;
+    private bool canDoubleJump;
+    public bool bootsPowerUp;
     
     // Start is called before the first frame update
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         isGrounded = false;
-        
+        bootsPowerUp = false;
     }
 
     // Update is called once per frame
@@ -32,14 +33,27 @@ public class Movement : MonoBehaviour
         isGrounded = Physics2D.Linecast(this.transform.position, groundedEnd.position, 1 << LayerMask.NameToLayer("Ground"));
         Debug.DrawLine(this.transform.position, groundedEnd.position, Color.green);
 
-        if (Input.GetButtonDown("Jump") && isGrounded == true)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
-            animator.SetBool("Jumping", false);
+            if (isGrounded)
+            {
+                rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+                animator.SetBool("Jumping", false);
+            }
+            else
+            {
+                if (bootsPowerUp && canDoubleJump)
+                {
+                    rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+                    animator.SetBool("Jumping", false);
+                    canDoubleJump = false;
+                }
+            }
         }
         if (isGrounded)
         {
             animator.SetBool("Jumping", false);
+            canDoubleJump = true;
         }
         if(!isGrounded)
         {

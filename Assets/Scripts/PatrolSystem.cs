@@ -70,11 +70,10 @@ public class PatrolSystem : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
 
-    public float GetRange(Transform minRange, Transform maxRange)
+    public float GetRange(float range, Transform minRange, Transform maxRange)
     {
-        float inRange;
-        inRange = Vector2.Distance(minRange.position, maxRange.position);
+        range = Vector2.Distance(minRange.position, maxRange.position);
 
-        return inRange;
+        return range;
     }
 }

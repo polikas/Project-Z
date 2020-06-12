@@ -9,7 +9,7 @@ public class MageControl : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private bool facingLeft = false;
     private float curTime = 0;
-    private float damageBetweenSeconds = 2f;
+    private float damageBetweenSeconds = 5f;
     public Transform rayStartPos, rayEndPos;
     public Transform minPatrolPos, maxPatrolPos;
     private Transform target;
@@ -53,7 +53,6 @@ public class MageControl : MonoBehaviour
     void PatrolMovement()
     {
         float step = moveSpeed * Time.deltaTime;
-        //Vector3.Distance(transform.position, minPatrolPos.position) < 0.001f
         if (Vector3.Distance(transform.position, minPatrolPos.position) < 0.001f)
         {
             transform.position = Vector3.MoveTowards(transform.position, maxPatrolPos.position, step);

@@ -6,6 +6,7 @@ public class MageHealthManager : MonoBehaviour
 {
     public int mageMaxHealth;
     public int mageCurrentHealth;
+   
     // Start is called before the first frame update
     void Start()
     {

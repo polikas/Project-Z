@@ -6,6 +6,18 @@ public class ZombieHealthManager : MonoBehaviour
 {
     public int zombieMaxHealth;
     public int zombieCurrentHealth;
+    public bool isDead;
+    public static ZombieHealthManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            return;
+        }
+        instance = this;
+        isDead = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +29,7 @@ public class ZombieHealthManager : MonoBehaviour
     {
         if (zombieCurrentHealth <= 0)
         {
+            isDead = true;
             Destroy(gameObject);
         }
     }
